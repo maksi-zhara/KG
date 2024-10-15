@@ -25,6 +25,11 @@ public class DrawPanel extends JPanel implements ActionListener {
         this.tr = new Triangle(new LPoint(200, 200), new LPoint(400, 200), new LPoint(300, 100), Color.RED, Color.GREEN, Color.BLUE);
     }
 
+    public void changeTriangleColor(Color c1, Color c2, Color c3)
+    {
+        tr.changeColor(c1, c2, c3);
+    }
+
     @Override
     public void paint(final Graphics gr) {
         super.paint(gr);

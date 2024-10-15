@@ -5,17 +5,8 @@ import ru.vsu.cs.task2.helpers.LPoint;
 import java.awt.*;
 
 public class Triangle{
-    //private final GeneralPath path;
     private LPoint[] points;
     private Color[] colors;
-    public Triangle(LPoint v1, LPoint v2, LPoint v3, Color c)
-    {
-        points = new LPoint[3];
-        points[0] = v1;
-        points[1] = v2;
-        points[2] = v3;
-        colors = new Color[]{c};
-    }
     public Triangle(LPoint v1, LPoint v2, LPoint v3, Color c1, Color c2, Color c3)
     {
         points = new LPoint[3];
@@ -28,7 +19,12 @@ public class Triangle{
         colors[1] = c2;
         colors[2] = c3;
     }
-
+    public void changeColor(Color c1, Color c2, Color c3)
+    {
+        colors[0] = c1;
+        colors[1] = c2;
+        colors[2] = c3;
+    }
     public void draw(Graphics2D g2) {
         int minX = Math.min(Math.min(points[0].x, points[1].x), points[2].x);
         int minY = Math.min(Math.min(points[0].y, points[1].y), points[2].y);
