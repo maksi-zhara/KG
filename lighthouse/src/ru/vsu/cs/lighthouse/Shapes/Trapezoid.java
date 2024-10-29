@@ -6,14 +6,42 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public class Trapezoid implements Shape {
-    private final GeneralPath path;
-    public Trapezoid(LPoint p1, LPoint p2, LPoint p3, LPoint p4) {
+    private GeneralPath path;
+    private LPoint[] points = new LPoint[4];
+    public Trapezoid() {
         path = new GeneralPath();
+    }
+    public Trapezoid(LPoint p1, LPoint p2, LPoint p3, LPoint p4) {
+        resetPath(p1, p2, p3, p4);
+    }
+    public void resetPath(LPoint p1, LPoint p2, LPoint p3, LPoint p4)
+    {
+        path = new GeneralPath();
+        points[0] = p1;
+        points[1] = p2;
+        points[2] = p3;
+        points[3] = p4;
+
         path.moveTo(p1.x, p1.y);
         path.lineTo(p2.x, p2.y);
         path.lineTo(p3.x, p3.y);
         path.lineTo(p4.x, p4.y);
         path.closePath();
+    }
+
+    public void addOffset(int xOffset) {
+       for(int i = 0; i < points.length; i++)
+       {
+           points[i].x += xOffset;
+       }
+        resetPath(points[0], points[1], points[2], points[3]);
+    }
+    public void setPoints(LPoint p1, LPoint p2, LPoint p3, LPoint p4) {
+        points[0] = p1;
+        points[1] = p2;
+        points[2] = p3;
+        points[3] = p4;
+        resetPath(p1, p2, p3, p4);
     }
     @Override
     public Rectangle getBounds() {

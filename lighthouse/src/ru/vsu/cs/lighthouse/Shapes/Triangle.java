@@ -6,16 +6,38 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public class Triangle implements Shape {
-    private Color color;
-    private final GeneralPath path;
-    public Triangle(Color color, LPoint v1, LPoint v2, LPoint v3)
+    private GeneralPath path;
+    private LPoint[] points;
+    public Triangle()
     {
-        this.color = color;
+        resetPath(new LPoint(0,0), new LPoint(0, 0), new LPoint(0,0));
+    }
+    public Triangle(LPoint p1, LPoint p2, LPoint p3)
+    {
+        resetPath(p1, p2, p3);
+    }
+    public void resetPath(LPoint p1, LPoint p2, LPoint p3)
+    {
         path = new GeneralPath();
-        path.moveTo(v1.x, v1.y);
-        path.lineTo(v2.x, v2.y);
-        path.lineTo(v3.x, v3.y);
+        points = new LPoint[3];
+        points[0] = p1;
+        points[1] = p2;
+        points[2] = p3;
+
+        path.moveTo(p1.x, p1.y);
+        path.lineTo(p2.x, p2.y);
+        path.lineTo(p3.x, p3.y);
         path.closePath();
+    }
+    public void addOffset(int xOffset) {
+        for(LPoint point : points) point.x += xOffset;
+        resetPath(points[0], points[1], points[2]);
+    }
+    public void setPoints(LPoint p1, LPoint p2, LPoint p3) {
+        points[0] = p1;
+        points[1] = p2;
+        points[2] = p3;
+        resetPath(p1, p2, p3);
     }
     @Override
     public Rectangle getBounds() {
@@ -66,7 +88,7 @@ public class Triangle implements Shape {
     public PathIterator getPathIterator(AffineTransform at, double flatness) {
         return path.getPathIterator(at, flatness);
     }
-    public void fill(Graphics2D g2) {
+    public void fill(Graphics2D g2, Color color) {
         g2.setColor(color);
         g2.fill(path);
     }

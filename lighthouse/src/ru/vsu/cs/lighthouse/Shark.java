@@ -6,25 +6,34 @@ import ru.vsu.cs.lighthouse.Shapes.Triangle;
 import java.awt.*;
 
 public class Shark {
-    private int posX, posY, width;
+    private LPoint pos;
+    private int width;
     private Triangle fin;
-    public Shark(int posX, int posY, int width) {
-        this.posX = posX;
-        this.posY = posY;
+    private int speed;
+    private final Color SHARKCOLOR = new Color(18, 32, 33);
+    public Shark(LPoint pos,  int width, int speed) {
+        this.pos = new LPoint(pos.x, pos.y);
         this.width = width;
-        this.fin = new Triangle(Color.BLACK, new LPoint(posX, posY), new LPoint(posX+width, posY), new LPoint(posX, posY-width));
+        this.fin = new Triangle(pos, new LPoint(pos.x+width, pos.y), new LPoint(pos.x, pos.y-width));
+        this.speed = speed;
     }
-
-    public int getPosX() {
-        return posX;
+    public int getWidth() { return width; }
+    public LPoint getPos() {
+        return pos;
     }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
+    public void setPos(LPoint pos) {
+        this.pos = pos;
+        fin.setPoints(new LPoint(pos.x, pos.y), new LPoint(pos.x+width, pos.y), new LPoint(pos.x, pos.y-width));
+    }
+    public void addOffsetX(int xOffset) {
+        pos.x+=xOffset;
+        fin.addOffset(xOffset);
     }
     public void draw(Graphics2D g2) {
-        Color color = new Color(255, 0, 0);
-        g2.setColor(color);
-        fin.draw(g2, color);
+        fin.fill(g2, SHARKCOLOR);
+    }
+    public void update()
+    {
+        addOffsetX(speed);
     }
 }

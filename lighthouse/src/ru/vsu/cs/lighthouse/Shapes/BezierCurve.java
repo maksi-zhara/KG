@@ -1,16 +1,27 @@
 package ru.vsu.cs.lighthouse.Shapes;
 
+import ru.vsu.cs.lighthouse.Helpers.LPoint;
+
 import java.awt.*;
 import java.util.ArrayList;
 
 public class BezierCurve {
-    private Point[] controlPoints;
-    public BezierCurve(Point[] controlPoints) {
+    protected LPoint[] controlPoints;
+    private Color color = Color.RED;
+    public BezierCurve() { this.controlPoints = null; }
+    public BezierCurve(LPoint[] controlPoints) {
         this.controlPoints = controlPoints;
     }
+    public void setControlPoints(LPoint[] controlPoints) { this.controlPoints = controlPoints; }
+    public void addXOffset(int offset) {
+        for(LPoint point : controlPoints) {
+            point.x += offset;
+        }
+    }
+
     public void draw(Graphics2D g) {
         g.setStroke(new BasicStroke(2.0f));
-        g.setColor(Color.BLUE);
+        g.setColor(color);
         Point previousPoint = null;
 
         for (double t = 0; t <= 1; t += 0.01) {
@@ -37,7 +48,7 @@ public class BezierCurve {
 
     public void drawControlPoints(Graphics2D g) {
         g.setColor(Color.RED);
-        for (Point p : controlPoints) {
+        for (LPoint p : controlPoints) {
             g.fillOval(p.x - 5, p.y - 5, 10, 10); // Рисуем контрольные точки
         }
     }
@@ -45,5 +56,13 @@ public class BezierCurve {
     private int binomial(int n, int k) {
         if (k == 0 || k == n) return 1;
         return binomial(n - 1, k - 1) + binomial(n - 1, k);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }
