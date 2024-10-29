@@ -1,14 +1,10 @@
 package ru.vsu.cs.lighthouse;
 import ru.vsu.cs.lighthouse.Helpers.LPoint;
-import ru.vsu.cs.lighthouse.Shapes.BezierCurve;
-import ru.vsu.cs.lighthouse.Shapes.Trapezoid;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class DrawPanel extends JPanel implements ActionListener {
@@ -39,19 +35,8 @@ public class DrawPanel extends JPanel implements ActionListener {
         mountains = new Mountains(500);
         lh = new LightHouse(600, 800, 500, 150, 400);
         water = new Water(PANEL_HEIGHT-350, 350, PANEL_WIDTH, new Color(48, 67, 64));
-        LPoint[] controlPoints = new LPoint[4];
-        controlPoints[0] = new LPoint(50, 200);
-        controlPoints[1] = new LPoint(150, 100);
-        controlPoints[2] = new LPoint(250, 300);
-        controlPoints[3] = new LPoint(350, 200);
         waves = new WaveAnimation[25];
         initWaves(waves);
-        LPoint[] points = new LPoint[]{
-                new LPoint(100, 400),
-                new LPoint(200, 100),
-                new LPoint(600, 100),
-                new LPoint(700, 400)
-        };
         ship = new Ship(150, getShipRandomPos());
         shark = new Shark(getShipRandomPos(), random.nextInt(20) + 20, 5);
         sun = new Sun(200, new LPoint(200, 200));
@@ -82,7 +67,10 @@ public class DrawPanel extends JPanel implements ActionListener {
         if(shark.getPos().x > PANEL_WIDTH) {
             shark.setPos(getShipRandomPos());
         }
-        else if(ship.getPosX() + shark.getWidth() > 0) ship.draw(gr);
+        else if(ship.getPosX() + shark.getWidth() > 0)
+        {
+            shark.draw(gr);
+        }
     }
     private void initWaves(WaveAnimation[] waves) {
         for(int i = 0; i < waves.length; i++)
@@ -147,7 +135,7 @@ public class DrawPanel extends JPanel implements ActionListener {
         water.draw((Graphics2D)gr);
         drawWaves((Graphics2D) gr);
         drawShip((Graphics2D)gr);
-        shark.draw((Graphics2D)gr);
+        drawShark((Graphics2D)gr);
     }
 
     @Override
