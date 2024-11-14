@@ -23,6 +23,8 @@ public class DrawPanel extends JPanel implements ActionListener {
     private Ship ship;
     private Shark shark;
     private Mountains mountains;
+    private Cloud cloud;
+
     public DrawPanel(final int width, final int height, final int timerDelay) {
         this.PANEL_WIDTH = width;
         this.PANEL_HEIGHT = height;
@@ -42,6 +44,7 @@ public class DrawPanel extends JPanel implements ActionListener {
         curve = new BezierCurve(points);
         ship = new Ship(100, new LPoint(200, 600));
         shark = new Shark(700, 700, 50);
+        cloud = new Cloud(800, 800, 30, 20, 150, 50);
     }
 
     @Override
@@ -55,7 +58,7 @@ public class DrawPanel extends JPanel implements ActionListener {
         curve.drawControlPoints((Graphics2D)gr);
         ship.draw((Graphics2D)gr);
         shark.draw((Graphics2D)gr);
-
+        cloud.draw((Graphics2D)gr);
     }
 
     @Override
