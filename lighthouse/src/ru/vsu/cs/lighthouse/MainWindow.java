@@ -10,8 +10,9 @@ public class MainWindow extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentShown(ComponentEvent e) {
-                int width = getWidth();
-                int height = getHeight();
+                Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+                int width = (int)size.getWidth();
+                int height = (int)size.getHeight();
                 panel = new DrawPanel(width, height, 100);
                 add(panel);
                 revalidate();

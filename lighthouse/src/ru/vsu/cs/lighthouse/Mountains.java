@@ -33,11 +33,9 @@ public class Mountains {
         Color color = new Color(255, 0, 0);
         g2d.setColor(color);
 
-        // Задаем цвет гор
-        g2d.setColor(new Color(43, 61, 61)); // Цвет гор
+        g2d.setColor(new Color(43, 61, 61));
         g2d.fill(path);
 
-        // Рисуем контур (по желанию)
         g2d.setColor(Color.DARK_GRAY);
         g2d.draw(path);
     }

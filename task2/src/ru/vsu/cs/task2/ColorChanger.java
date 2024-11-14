@@ -46,7 +46,7 @@ public class ColorChanger extends JFrame {
 
         panel.add(changeColorButton);
 
-        add(panel); // Добавляем панель в окно
+        add(panel);
     }
 
     private void changeColor() {
