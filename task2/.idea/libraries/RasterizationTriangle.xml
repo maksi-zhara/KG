@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="RasterizationTriangle">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../RasterizationTriangle/out/artifacts/RasterizationTriangle_jar/RasterizationTriangle.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
