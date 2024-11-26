@@ -1,5 +1,7 @@
 package ru.vsu.cs.task2;
 
+import ru.vsu.cs.rasterization.RasterizationTriangle;
+import ru.vsu.cs.rasterization.drawers.SwingPixelDrawer;
 import ru.vsu.cs.task2.helpers.LPoint;
 import ru.vsu.cs.task2.shapes.Triangle;
 
@@ -33,7 +35,9 @@ public class DrawPanel extends JPanel implements ActionListener {
     @Override
     public void paint(final Graphics gr) {
         super.paint(gr);
-        tr.draw((Graphics2D) gr);
+        LPoint[] points = tr.getPoints();
+        Color[] colors = tr.getColors();
+        RasterizationTriangle.RasterizeTriangle(new SwingPixelDrawer((Graphics2D) gr), new int[] {points[0].x, points[1].x, points[2].x}, new int[] {points[0].y, points[1].y, points[2].y}, colors[0], colors[1], colors[2]);
     }
 
     @Override
