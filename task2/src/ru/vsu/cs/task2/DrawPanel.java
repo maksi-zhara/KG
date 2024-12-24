@@ -1,7 +1,8 @@
 package ru.vsu.cs.task2;
 
-import ru.vsu.cs.task2.helpers.LPoint;
-import ru.vsu.cs.task2.shapes.Triangle;
+import ru.vsu.cs.rasterization.RasterizationTriangle;
+import ru.vsu.cs.rasterization.drawers.FXPixelDrawer;
+import ru.vsu.cs.rasterization.drawers.SwingPixelDrawer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,25 +16,20 @@ public class DrawPanel extends JPanel implements ActionListener {
     private final int TIMER_DELAY;
     private Timer timer;
     private int ticksFromStart = 0;
-    private Triangle tr;
     public DrawPanel(final int width, final int height, final int timerDelay) {
         this.PANEL_WIDTH = width;
         this.PANEL_HEIGHT = height;
         this.TIMER_DELAY = timerDelay;
         timer = new Timer(timerDelay, this);
         timer.start();
-        this.tr = new Triangle(new LPoint(200, 300), new LPoint(600, 300), new LPoint(400, 100), Color.RED, Color.GREEN, Color.BLUE);
-    }
-
-    public void changeTriangleColor(Color c1, Color c2, Color c3)
-    {
-        tr.changeColor(c1, c2, c3);
     }
 
     @Override
     public void paint(final Graphics gr) {
         super.paint(gr);
-        tr.draw((Graphics2D) gr);
+        RasterizationTriangle.RasterizeTriangle(new SwingPixelDrawer((Graphics2D) gr),
+                    new int[]{200, 400, 700}, new int[] {100, 200, 400}, Color.RED, Color.GREEN, Color.BLUE
+                );
     }
 
     @Override
